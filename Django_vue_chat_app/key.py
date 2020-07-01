@@ -1,25 +1,12 @@
-# import keyboard
-from pynput.keyboard import Key, Controller
-keyboard = Controller()
+import keyboard
 import time
 time.sleep(2)
-keyboard.press(Key.tab)
-keyboard.release(Key.tab)
-# keyboard.press_and_release('enter')
-# time.sleep(5)
-# keyboard.press('windows'
-# keyboard.press_and_release('enter')
-time.sleep(5)
-keyboard.press(Key.tab)
-keyboard.release(Key.tab)
-print('i hit tab')
-# keyboard.press(Key.esc)
-# keyboard.release(Key.esc)
-keyboard.press(Key.tab)
-keyboard.release(Key.tab)
-keyboard.press(Key.tab)
-keyboard.release(Key.tab)
-keyboard.press(Key.tab)
-keyboard.release(Key.tab)
+keyboard.press_and_release('esc')
+keyboard.press_and_release('enter')
+time.sleep(2)
+keyboard.press_and_release('windows')
+keyboard.press_and_release('enter')
+time.sleep(2)
+
 print('i am here')
-# keyboard.write('The quick brown fox jumps over the lazy dog   .')
+# keyboard.write('The quick brown fox jumps over the lazy dog.')

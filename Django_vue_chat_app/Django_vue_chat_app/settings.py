@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'postsapp',
+    # 'Posts',
     'chatapp',
     'rest_framework',
     'rest_framework.authtoken',
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'rest_auth',
     'rest_auth.registration',
-    'crispy_forms'
+    'crispy_forms',
+    'Status'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,10 @@ LOGOUT_REDIRECT_URL='/'
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_DIR=os.path.join(BASE_DIR,"static")
+STATICFILES_DIRS=[STATIC_DIR]
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'
 AUTH_USER_MODEL='users.CustomUser'
 CRISPY_TEMPLATE_PACK='bootstrap4'
 SITE_ID=1
@@ -140,15 +145,15 @@ ACCOUNT_EMAIL_REQUIRED=(True)
 
 #rest_frameowrk
 REST_FRAMEWORK={
-    'DEFAULT_AUTHENTICATION_CLASSES':{
+    'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
 
-    },
-    'DEFAULT_PERMISSION_CLASSES':{
+),
+    'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.IsAuthenticated',
 
-    }
+    )
 
 
 }
