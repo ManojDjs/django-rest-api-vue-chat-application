@@ -1,0 +1,3 @@
+for vue to mount on django
+npm install --save-dev webpack-bundle-tracker@0.4.3
+ this version of bundle pack is optimal
