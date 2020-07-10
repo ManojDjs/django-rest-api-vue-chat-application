@@ -1,18 +1,18 @@
 <template>
   <div class="container">
   <div class="row">
-            <h3>{{ currentuser.username }}</h3>
+            <!-- <h3>{{ currentuser.username }}</h3> -->
             <div class="col col-lg-4 float-right scrolluser">
              <button type="button" class="btn btn-primary btn-block outline">Users online</button>
               <ul class="list-group">
                 
                 <a
                   class="list-group-item list-group-item-action"
-                  @click="get_chat(user)"
+                  @click="get_chat(user.username)"
                   v-for="(user,index) in users"
                   v-bind:key="index"
                 ><img src="../assets/user.png" class="img-circle"  alt="image" >
-                <h1 style="font: italic small-caps bold 20px/30px Georgia, serif;">{{ user }}</h1></a>
+                <h1 style="font: italic small-caps bold 20px/30px Georgia, serif;">{{ user.username }}</h1></a>
               </ul>
             </div>
         <div class="col float-left">
@@ -21,11 +21,23 @@
               <span class="glyphicon glyphicon-comment"></span>
               <button type="button" class="btn btn-primary btn-block outline">CHAT</button>
               <h4>{{ selected }}</h4>
-<ul>
-  <li v-for="(message,index) in messages"
-                  v-bind:key="index">
-                  <p>message.text</p>
-                  </li>
+<ul class="list-group">
+  <li  class="list-group-item" v-for="(message,index) in messages" v-bind:key="index">
+
+    <blockquote class="blockquote text-right" v-if="message.sender===currentuser.username">
+  <p class="mb">{{ message.text }}</p>
+  <footer class="blockquote-footer">{{ message.sender }}<cite title="Source Title">{{ message.time }}</cite></footer>
+</blockquote>
+<blockquote class="blockquote text-right" v-else-if="message.receiver===currentuser.username">
+  <p class="mb">{{ message.text }}</p>
+  <footer class="blockquote-footer">{{ message.receiver }}<cite title="Source Title">{{ message.time }}</cite></footer>
+</blockquote>
+<blockquote class="blockquote text-left" v-else>
+  <p class="mb">{{ message.text }}</p>
+
+  <footer class="blockquote-footer" v-if="message.receiver">{{ message.receiver }}<cite title="Source Title">{{ message.time }}</cite></footer>
+</blockquote>
+  </li>
 </ul>
               
             </div>
@@ -43,7 +55,7 @@
 
 <script>
 
-import { apiService } from "@/common/api.service.js";
+// import { apiService } from "@/common/api.service.js";
 import axios from 'axios';
 import { CSRF_TOKEN } from "@/common/csrftoken.js"
 export default {
@@ -57,32 +69,25 @@ export default {
     }
   },
   mounted () {
-    const config = {
+    
+      
+  },
+  methods:{
+    get_user(){
+       const config = {
     method: "GET",
     headers: {
       'content-type': 'application/json',
       'X-CSRFToken': CSRF_TOKEN
     }
-  };
-  axios
-      .get('/api/get_log_user/',config)
-      .then(response => (this.currentuser = response.data))
-  axios
+    }
+      axios
       .get('/api/user/',config)
-      .then(response => (this.users = response.data))
-      
-  },
-  methods:{
-    get_users(){
-      let endpoint="api/user/";
-      apiService(endpoint)
-      .then(data=>{
-        this.users.push(data);
-        this.users.$delete(this.currentuser.username)
-      })
+      .then(response => (this.currentuser = response.data))
+      // console.log(this.currentuser)
     },
     
-    get_chat(user){
+    get_users(user){
       this.selected=user
       const config = {
     method: "GET",
@@ -92,12 +97,36 @@ export default {
     }
     }
     axios
-      .get('/Status/message/',config)
-      .then(response => (this.messages = response.data))
+      .get('/api/get_users/',config)
+      .then(response => (this.users=response.data))
+      
+    },
+    get_chat(user){
+      console.log(user);
+      console.log(this.currentuser.username);
+    var endpoint='/Status/message/?search='+this.currentuser.username+'+'+user;
+    console.log(endpoint)
+    // apiService(endpoint,"GET")
+    // .then(data=>{
+    //   this.messages.push(...data)
+    // })
+     const config = {
+    method: "GET",
+    headers: {
+      'content-type': 'application/json',
+      'X-CSRFToken': CSRF_TOKEN
+    }
+    }
+      axios
+      .get(endpoint,config)
+      .then(response => (this.messages=response.data))
       console.log(this.messages)
     }
+    
+    
   },
   created(){
+      this.get_user();
       this.get_users();
       console.log(this.users)
     }
