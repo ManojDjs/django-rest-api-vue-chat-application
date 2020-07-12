@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "bootstrap4": "0.0.1-security",
     "core-js": "^3.6.5",
+    "v-emoji-picker": "^2.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
@@ -28,6 +29,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "prettier": "^1.19.1",
+    "sass-loader": "^9.0.2",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-tracker": "^0.4.3"
   },

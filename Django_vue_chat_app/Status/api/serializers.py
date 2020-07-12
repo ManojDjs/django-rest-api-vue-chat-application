@@ -38,4 +38,4 @@ class MessagesSerializer(serializers.ModelSerializer):
         model = Messages
         fields = '__all__'
     def get_time(self, instance):
-        return instance.time.strftime("%B %d, %Y,%I:%M:%S %p")
+        return instance.time.strftime("%B %d, %Y,%I:%M %p")
