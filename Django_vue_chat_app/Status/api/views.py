@@ -21,15 +21,16 @@ class Statusedit(generics.RetrieveUpdateDestroyAPIView):
 class CommentCreate(generics.ListCreateAPIView):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
-    lookup_field = 'pk'
+    lookup_field = 'slug'
     def perform_create(self, serializer):
-        post_pk = self.kwargs.get('pk')
+        post_pk = self.kwargs.get('slug')
         post = get_object_or_404(Status,pk=post_pk)
         user=self.request.user
         serializer.save(author=user,post=post)
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
+    # lookup_field = 'slug
 class MessagesCreate(generics.ListCreateAPIView):
     queryset = Messages.objects.all()
     serializer_class = MessagesSerializer

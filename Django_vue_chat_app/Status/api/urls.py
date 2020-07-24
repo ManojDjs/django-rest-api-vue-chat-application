@@ -10,8 +10,8 @@ urlpatterns = [
     path(r'status/', StatusCreate.as_view(), name='status'),
     path(r'status/<str:slug>', Statusedit.as_view(), name='status-edit'),
     path(r'message/', MessagesCreate.as_view(), name='message'),
-    path(r'comment/<int:pk>/', CommentDetail.as_view(), name='comment-create'),
-    path(r'status/<int:pk>/comment', CommentCreate.as_view(), name='comment-post'),
+    path(r'comment/<str:pk>/', CommentDetail.as_view(), name='comment-create'),
+    path(r'status/<str:slug>/comment', CommentCreate.as_view(), name='comment-post'),
     path(r'message/<int:pk>', Messageedit.as_view(), name='message-edit'),
     path(r'status/<str:slug>/like', StatusLikeAPIView.as_view(), name='like'),
 ]

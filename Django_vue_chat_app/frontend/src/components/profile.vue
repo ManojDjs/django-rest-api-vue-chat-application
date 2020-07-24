@@ -1,39 +1,46 @@
 <template>
     <div class="container">
-        <h1 class="text-center text-uppercase">{{ userdata.username}}'s Profile inforamtion</h1>
+
+        <h1 class="text-center text-uppercase">Profile </h1>
+        <div class="row justify-center-md-center" >
+                 <div class="col-md-6 offset-md-3">
+                <b-img v-bind="mainProps" id='profile' src="https://picsum.photos/250/250/?image=58" rounded="circle" alt="Circle image"></b-img>
+                 </div>
+        </div>
+        <div class="row justify-center-md-center" id='menu'>
+                 <div class="col-md-6 offset-md-3">
+                    <div class="mt-3">
+                    <b-button-group size="lg">
+                    <b-button variant="light"><b-icon-images class="h5 mb-2"></b-icon-images></b-button>
+                    <b-button variant="light"><b-icon-info-square class="h5 mb-2"></b-icon-info-square></b-button>
+                    <b-button variant="light"><b-icon-shield-shaded class="h5 mb-2"></b-icon-shield-shaded></b-button>
+                    </b-button-group>
+                    </div>
+                </div>
+        </div>
+        <div class="row justify-center-md-center" >
+                 <div class="col-md-6 offset-md-3">
+                            <ul class="list-group">
+                    <li class="list-group-item ">
+                        <div class="md-v-line"></div><i class="fas fa-laptop mr-4 pr-3"></i> Cras justo odio
+                    </li>
+                    <li class="list-group-item">
+                        <div class="md-v-line"></div><i class="fas fa-bomb mr-5"></i>Dapibus ac facilisis in
+                    </li>
+                    <li class="list-group-item">
+                        <div class="md-v-line"></div><i class="fas fa-code mr-5"></i>Morbi leo risus
+                    </li>
+                    <li class="list-group-item">
+                        <div class="md-v-line"></div><i class="far fa-gem mr-5"></i>Porta ac consectetur ac
+                    </li>
+                    <li class="list-group-item">
+                        <div class="md-v-line"></div><i class="fas fa-cogs mr-5"></i>Vestibulum at eros
+                    </li>
+                    </ul>
+                 </div>
+        </div>
     <div class="row justify-content-md-center">
             
-            <div class=col-sm-5 col-md-6>
-            <b-card
-                title="Profile pic"
-                :img-src="currentuser.image"
-                img-alt="Image"
-                img-top
-                tag="article"
-                style="max-width: 20rem;"
-                class="mb-2"
-                id='card'
-                rounded="circle"
-                >
-                <div v-if="imageeditmode===true">
-                 <input type="file"  accept="image/jpeg" @change=uploadImage>
-                 <br>
-                 <div v-ripple.mouseover="'rgba(66,109,109, 0.35)'" v-on:click='image_edit' class="button is-primary is-small"  style="margin: 1rem,width:3in">save profile</div>
-        
-                </div>
-                <div v-else>
-                <b-card-text >
-                    try different image...
-                    </b-card-text>
-                     <div v-ripple.mouseover="'rgba(66,109,109, 0.35)'" v-on:click='image_edit_initiate' class="button is-primary is-small"  style="margin: 1rem,width:3in">change image</div>
-        
-                </div>
-                
-                      
-            </b-card>
-            
-            </div>
-            <div class=col-sm-5 offset-sm-2 col-md-6 offset-md-0>
                 <div class="row">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -156,7 +163,7 @@
                                                         <p>Your detail description</p>
                                                     </div>
                                                 </div>
-                                    </div>
+                                    
                                 </div>
             
 
@@ -197,7 +204,8 @@ export default {
     currentuser:'',
     userdata:'',
     msg: "Vue Image Upload and Resize Demo",
-    previewImage:null
+    previewImage:null,
+    mainProps: {  width: 175, height: 175, class: 'm1' }
     
     }
   },
@@ -430,5 +438,14 @@ body{
 }
 #card{
     height: 500px;
+}
+.row{
+    padding-top:0.2in;
+}
+#menu{
+    border-bottom: 1px solid black;
+}
+#profile{
+    /* border: 3px dotted  #0062cc; */
 }
 </style>

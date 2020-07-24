@@ -36,7 +36,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/rest-auth', include('rest_auth.urls')),
     path('api/rest-auth/registration', include('rest_auth.registration.urls')),
-    re_path(r'^.*$', indexTemplate.as_view(), name='entry_point')
+    re_path(r'(?!media|accounts)^.*$', indexTemplate.as_view(), name='entry_point')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
