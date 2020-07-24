@@ -1,10 +1,17 @@
 <template>
   <div class="container">
     <div class="row justify-center-md-center" >
+    <div class="col-md-6 offset-md-3" >
+      <form id="uploadForm" name="uploadForm" enctype="multipart/form-data">
+      <input type="file" id="avatar" name="avatar" multiple><br>
+      <input type=button value=Upload @click="upload_picture">
+    </form>
+    </div>
+    </div>
+    <div class="row justify-center-md-center" >
     <div class="col-md-6 offset-md-3"  v-for="(post,index) in posts"
                   v-bind:key="index" >
           <!-- Card -->
-                   
                   <div class="card">
                     <!-- Card image -->
                     <div class='row justify-content-start' id='card_user'>
@@ -60,6 +67,7 @@ export default {
        mainPropscard:{ class: 'm1'},
        user_data:'',
        like_mode:false,
+       selected:null,
     }
   },
   watch:{
@@ -70,6 +78,32 @@ export default {
   },
 methods:
 {
+  upload_picture(){
+
+    const data = new FormData(document.getElementById('uploadForm'))
+    var imagefile = document.querySelector('#avatar')
+    console.log(imagefile.files[0])
+    console.log(imagefile.files[0].name)
+    data.append('image', imagefile.files[0],imagefile.files[0].name)
+    data.append('likes', [this.user_data.id])
+    data.append('Content', 'new data boss')
+    console.log(data)
+    const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+      'X-CSRFToken': CSRF_TOKEN
+    }
+    }
+      axios
+      .post('/Status/status/',data,config)
+      .then(response => {
+        console.log(response.data, '<<< response.data >>>')
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      
+    },
   get_profile(){
        const config = {
     method: "GET",

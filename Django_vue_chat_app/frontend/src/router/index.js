@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import logout from '@/components/logout.vue';
 import Profile from '@/components/profile.vue';
+import HW from '@/components/HelloWorld.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,6 +16,11 @@ const routes = [
     path: "/",
     name: "Logout",
     component: logout
+  },
+  {
+    path: "/hw",
+    name: "hw",
+    component: HW
   },
   {
     path: "/profile",
